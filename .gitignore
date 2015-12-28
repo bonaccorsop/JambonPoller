@@ -1,0 +1,60 @@
+# +++++++++++++++++++++++++++++
+# ++++++++++++ POLLER++++++++++
+# +++++++++++++++++++++++++++++
+tmp.pdf
+processed-emails.txt
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+.vagrant/
+
+### SublimeText ###
+# cache files for sublime text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+.sublime-workspace
+*.sublime-project
+
+### Visual studio code ###
+.settings/
+
+### Bower ###
+public/assets/components
+
+# +++++++++++++++++++++++++++++
+# ++++++++++++ SASS +++++++++++
+# +++++++++++++++++++++++++++++
+.sass-cache
+.cache
+
+### Composer ###
+composer.phar
+composer.lock
+vendor/
+
+### grunt ###
+# Grunt usually compiles files inside this directory
+#dist/
+# Grunt usually preprocesses files such as coffeescript, compass... inside the .tmp directory
+.tmp/
+
+public/robot.txt
+
+# phpStorm
+.idea
+
+# VisualStudioCode
+.settings
+.vscode/
+
+nohup.out
+
+# Maintenance Lock file
+.maintenance
+
+# Framework artifacts
+artifacts/artifacts/logs/*
+
