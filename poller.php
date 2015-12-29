@@ -43,36 +43,43 @@ do {
 
     foreach ($emails as $email) {
 
-        if(! in_array($email['id'], $emailProcessedDatabase)) {
+        //controllo se il messaggio è già stato processato
+        if(in_array($email['id'], $emailProcessedDatabase)) {
+            continue;
+        }
 
-            if(! empty($email['body']['html'])) {
+        //controllo se il messaggio è più vecchio di 8 ore
+        $time = \Carbon\Carbon::createFromTimestamp(substr($email['time'], 0, -3));
+        $hoursOffset = \Carbon\Carbon::now()->diffInHours($time);
 
-                $html = $email['body']['html'][0];
+        if($hoursOffset > 8) {
+            continue;
+        }
 
-                if(matchSubject($email['subject'], 'Invio ordine MOSAICOON SpA')) {
 
-                    //ricezione di un ordine
+        if(! empty($email['body']['html'])) {
 
-                    sendHtmlPrintJob($html);
+            $html = $email['body']['html'][0];
 
-                } elseif(matchSubject($email['subject'], 'MENU')) {
+            if(matchSubject($email['subject'], 'Invio ordine MOSAICOON SpA', false)) {
 
-                    //conferma caricamento menu
+                //ricezione di un ordine
+                sendHtmlPrintJob($html);
+                suonaCampanellino();
 
-                    $html = pulisciTabellaPerPapa($html);
+            } elseif(matchSubject($email['subject'], 'MENU')) {
 
-                    sendHtmlPrintJob($html);
-
-                }
+                //conferma caricamento menu
+                //$html = pulisciTabellaPerPapa($html);
+                sendHtmlPrintJob($html);
+                suonaCampanellino();
 
             }
 
-            //suona il campanello
-            suonaCampanellino();
-
-            //segna come processato
-            setProcessed($emailProcessedDatabase, $email['id']);
         }
+
+        //segna come processato
+        setProcessed($emailProcessedDatabase, $email['id']);
 
     }
 
@@ -137,11 +144,17 @@ function suonaCampanellino()
 
 // --------------------------------------------------------------------
 
-function matchSubject($subject, $toMatch)
+function matchSubject($subject, $toMatch, $caseSensitive = true)
 {
     $matches = is_array($toMatch) ? $toMatch : [$toMatch];
 
     foreach ($matches as $m) {
+
+        if(! $caseSensitive) {
+            $subject = strtoupper($subject);
+            $m = strtoupper($m);
+        }
+
         if(strpos($subject, $m) !== false) {
             return true;
         }

@@ -12,6 +12,7 @@ class Message
     }
 
     public function getSubject();
+    public function getSubject();
 
 
 }
