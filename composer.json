@@ -2,9 +2,9 @@
     "require": {
         "google/apiclient": "1.*",
         "dompdf/dompdf" : "0.6.*",
+        "pwfisher/command-line-php" : "dev-master",
         "symfony/dom-crawler" : "3.0.1",
         "symfony/css-selector" : "3.0.1",
-
         "nesbot/carbon": "1.21.0",
         "league/csv": "*",
         "guzzlehttp/guzzle": "6.1.1",

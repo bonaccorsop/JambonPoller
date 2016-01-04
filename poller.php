@@ -17,7 +17,9 @@ define('SOUND_BELL', APP_CWD . '/sounds/bell1.mp3');
 require_once APP_CWD . '/vendor/dompdf/dompdf/dompdf_config.inc.php';
 
 
-$listeningMode = false;
+$args = \CommandLine::parseArgs($_SERVER['argv']);
+$listeningMode = @$args['listen'] ? true : false;
+
 
 $gmail = new JamPoller\GmailClient\GmailClient;
 
