@@ -3,6 +3,7 @@
 # +++++++++++++++++++++++++++++
 tmp.pdf
 processed-emails.txt
+env.php
 
 ### OSX ###
 .DS_Store

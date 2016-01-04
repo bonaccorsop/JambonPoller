@@ -12,6 +12,9 @@ define('APP_TIMEZONE', 'Europe/Rome');
 //autoload di composer
 require_once APP_CWD . '/vendor/autoload.php';
 
+//carico gli environments
+require_once APP_CWD . '/environments.php';
+
 //Impostazione del Timezone
 date_default_timezone_set(APP_TIMEZONE);
 

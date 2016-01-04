@@ -9,11 +9,7 @@ require_once __DIR__ . '/bootstrap.php';
 // disable DOMPDF's internal autoloader if you are using Composer
 define('DOMPDF_ENABLE_AUTOLOAD', false);
 
-define('LPR_COMMAND', '/usr/bin/lpr');
-
 define('PROCESSED_EMAILS_DB', APP_CWD . '/processed-emails.txt');
-
-define('MPLAYER_COMMAND', '/usr/local/bin/mplayer');
 
 define('SOUND_BELL', APP_CWD . '/sounds/bell1.mp3');
 
@@ -183,10 +179,13 @@ function sendHtmlPrintJob($html)
 
     echo("Invio di un processo di stampa...\n");
 
-    $result = exec("{$lprCommand} {$fileBuffer}");
+    if(PRINT_MESSAGES) {
+        return exec("{$lprCommand} {$fileBuffer}");
+    } else {
+        return true;
+    }
 
-    //return true;
-    return $result;
+
 }
 
 
